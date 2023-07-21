@@ -16,5 +16,10 @@ namespace VakifInternship_2.view
         {
             InitializeComponent();
         }
+
+        private void btnSelectPath_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
