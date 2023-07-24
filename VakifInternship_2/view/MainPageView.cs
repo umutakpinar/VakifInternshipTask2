@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using VakifInternship_2.controller;
 
 namespace VakifInternship_2.view
 {
@@ -19,7 +20,9 @@ namespace VakifInternship_2.view
 
         private void btnSelectPath_Click(object sender, EventArgs e)
         {
-
+            UIController controller = new UIController();
+            controller.SelectPath(tbxInput);
+            controller.RefreshScreen(dataGridView1,tbxInput);
         }
     }
 }

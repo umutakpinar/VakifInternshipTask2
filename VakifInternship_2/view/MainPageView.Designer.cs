@@ -40,6 +40,7 @@
             this.tbxInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxInput.Location = new System.Drawing.Point(126, 60);
             this.tbxInput.Name = "tbxInput";
+            this.tbxInput.ReadOnly = true;
             this.tbxInput.Size = new System.Drawing.Size(1470, 57);
             this.tbxInput.TabIndex = 0;
             // 
@@ -81,6 +82,7 @@
             this.Controls.Add(this.btnSelectPath);
             this.Controls.Add(this.tbxInput);
             this.Name = "MainPageView";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MainPageView";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
