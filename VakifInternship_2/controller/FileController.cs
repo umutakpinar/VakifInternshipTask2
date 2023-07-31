@@ -25,7 +25,7 @@ namespace VakifInternship_2.controller
             using (var fbd = new FolderBrowserDialog()) // Path'i almak için FolderBrowserDialog kullandım
             {
                 DialogResult result = fbd.ShowDialog(); //Dialog'u gösterdim ve dialog sonucunu kaydettim
-                if (fbd.ShowDialog() == DialogResult.OK && !string.IsNullOrEmpty(fbd.SelectedPath)) //Seçme işlemi tamamlandıysa ve seçilen yol null değil ise
+                if (result == DialogResult.OK && !string.IsNullOrEmpty(fbd.SelectedPath)) //Seçme işlemi tamamlandıysa ve seçilen yol null değil ise
                 {
                     path = fbd.SelectedPath; //Seçilen al
                 }
@@ -34,19 +34,18 @@ namespace VakifInternship_2.controller
         }
 
         public List<FileModel> CheckFilesInsideDirectory(string directoryPath)
-        {
-            //BURAYA TRY CATCH EKLEYECEĞİM!!! SONUÇTA BİR FİLE OPERATİON YAPIYORUM
-            DirectoryInfo dirInf = new DirectoryInfo(directoryPath); //Klasör hakkındaki bilgileri tutuyorum
-            FileInfo[] fileInfos =  dirInf.GetFiles();
-            foreach (FileInfo fileInfo in fileInfos)
-            {
-                string fileName = fileInfo.Name;
-                string filePath = fileInfo.FullName;
-                if (filePath.EndsWith(".prc")) //eğer dosya bir .prc dosyası ise listeye alabiliriz
+        {  
+                DirectoryInfo dirInf = new DirectoryInfo(directoryPath); //Klasör hakkındaki bilgileri tutuyorum
+                FileInfo[] fileInfos = dirInf.GetFiles();
+                foreach (FileInfo fileInfo in fileInfos)
                 {
-                    _fileList.Add(CheckFile(fileName, filePath));
+                    string fileName = fileInfo.Name;
+                    string filePath = fileInfo.FullName;
+                    if (filePath.EndsWith(".prc")) //eğer dosya bir .prc dosyası ise listeye alabiliriz
+                    {
+                        _fileList.Add(CheckFile(fileName, filePath));
+                    }
                 }
-            }
             return _fileList;
 
         }
