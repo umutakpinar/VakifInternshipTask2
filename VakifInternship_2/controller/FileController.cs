@@ -10,7 +10,6 @@ using System.Text.RegularExpressions;
 
 namespace VakifInternship_2.controller
 {
-    // .PRC OLDUĞUNU KONTROL ETMEYİ UNUTTUN ONU DA EKLE
     internal class FileController
     {
         private List<FileModel> _fileList;
@@ -18,30 +17,37 @@ namespace VakifInternship_2.controller
         {
             _fileList = new List<FileModel>();
         }
-
-        public static string GetDirectory() //Bu fonksiyonu çağıracağım view classında try catch kullacağım (sanırım try catch'i burada kullanmak daha mantıklı  aslında?)
+        /// <summary>
+        /// Kullanıcıdan bir klasör seçmesini ister ve klasör yolunu döndürür.
+        /// </summary>
+        /// <returns>Seçilmezse null döner.</returns>
+        public static string GetDirectory() 
         {
             string path = null;
-            using (var fbd = new FolderBrowserDialog()) // Path'i almak için FolderBrowserDialog kullandım
+            using (var fbd = new FolderBrowserDialog()) 
             {
-                DialogResult result = fbd.ShowDialog(); //Dialog'u gösterdim ve dialog sonucunu kaydettim
-                if (result == DialogResult.OK && !string.IsNullOrEmpty(fbd.SelectedPath)) //Seçme işlemi tamamlandıysa ve seçilen yol null değil ise
+                DialogResult result = fbd.ShowDialog(); 
+                if (result == DialogResult.OK && !string.IsNullOrEmpty(fbd.SelectedPath)) 
                 {
-                    path = fbd.SelectedPath; //Seçilen al
+                    path = fbd.SelectedPath; 
                 }
             }
-            return path; //Son olarak seçilen pathi döndür
+            return path; 
         }
-
+        /// <summary>
+        /// parametre olarak bir klasör path'i alır. Klasördeki dosyaları tarar ve .prc uzantılı olanları bir listede tutar.
+        /// </summary>
+        /// <param name="directoryPath">Klasör'ün yolu</param>
+        /// <returns>FileModel tipinde öğeler barındıran bir Liste döner.</returns>
         public List<FileModel> CheckFilesInsideDirectory(string directoryPath)
         {  
-                DirectoryInfo dirInf = new DirectoryInfo(directoryPath); //Klasör hakkındaki bilgileri tutuyorum
+                DirectoryInfo dirInf = new DirectoryInfo(directoryPath);
                 FileInfo[] fileInfos = dirInf.GetFiles();
                 foreach (FileInfo fileInfo in fileInfos)
                 {
                     string fileName = fileInfo.Name;
                     string filePath = fileInfo.FullName;
-                    if (filePath.EndsWith(".prc")) //eğer dosya bir .prc dosyası ise listeye alabiliriz
+                    if (filePath.EndsWith(".prc")) 
                     {
                         _fileList.Add(CheckFile(fileName, filePath));
                     }
@@ -49,7 +55,15 @@ namespace VakifInternship_2.controller
             return _fileList;
 
         }
-
+        /// <summary>
+        /// Parametre olarak gönderilen sp'yi analiz eder. Bulguları bir FileModel nesnesine yazar ve FileModel tipinde geri döndürür.
+        /// Burada gelen dosyanın Dinamik olup olmadığına bakar Dynamic sp değilse dosyayı atlar. Dynmaic sp ise içerisinde varchar2 tipinde parametre alıp almadığını kontrol eder.
+        /// Eğer varchar2 parametreleri var ise ve bu parametreler injectionable ise bu durumda innjectionable parametreleri FileModel nesnesine kaydeder.
+        /// Son olarak bu FileModel nesnesini döndürür.
+        /// </summary>
+        /// <param name="fileName">Dosya adı</param>
+        /// <param name="filePath">Dosya yolu</param>
+        /// <returns>FileModel döner.</returns>
         public FileModel CheckFile(string fileName, string filePath)
         {
             FileModel file = new FileModel(fileName, filePath);
@@ -59,38 +73,45 @@ namespace VakifInternship_2.controller
             if (file.IsDynmaicSP) //dynamicSP ise içinde varchar2 var mı diye kontrol et
             {
                 string[] varchar2params = FindVarchar2Parameters(fileData); //içinde varchar2 parametreleri diziye at
-                
-                foreach(string i in varchar2params)
-                {
-                    Console.WriteLine("varchar2 param : "+i);
-                }
-
+               
                 if (varchar2params.Length > 0) //varsa injection yapılaiblir mi onu kontrol edelim
                 {
                     file.HasVarchar2 = true;
                     string[] uninjectableparams = FindUninjectableVarchar2Parameters(fileData);
                     file.InjectableParameters = string.Join(",",FindInjectableVarchar2Params(varchar2params, uninjectableparams));
                 }
-                else //yoksa daha fazla işleme gerek yok
+                else
                 {
                     file.HasVarchar2 = false;
                 }
-            } //NULL HATASI ALIRSAM BURADA ELSE BLOĞU İÇERİSİNDE DYNAMİC OLMAYAN FİLE ÖĞESİNE BOŞ PARAMETRELER ATA!!!!!!!!!
+            } 
 
             return file;
         }
-
+        /// <summary>
+        /// Parametre olarak gelen sp dosyasının içerğini inceler. Eğer dinamik sp ise true döner. 
+        /// </summary>
+        /// <param name="fileData">Dosya içeriğini alır (string)</param>
+        /// <returns>Boolean dönecek. Dynamic ise true değilse false. </returns>
         public static bool IsDynamic(string fileData)
         {
-            string pattern = @"'''"; //dynamic olup olmadığını belirlemek
-            return Regex.IsMatch(fileData, pattern); //Eğer bir tane bile eşleşme varsa dynamictir
+            string pattern = @"'''"; 
+            return Regex.IsMatch(fileData, pattern);
         }
-
+        /// <summary>
+        /// Parametre olarak verilen dosya yolundaki dosyanın içeriğini okur ve string olarak geriye döner. 
+        /// </summary>
+        /// <param name="filePath">Dosya yolu (string)</param>
+        /// <returns>Okuduğu dosya içeriğini string olarak döner. </returns>
         public static string ReadFileData(string filePath)
         {
             return File.ReadAllText(filePath);
         }
-
+        /// <summary>
+        /// Parametre olarak verilen dosya içeriğinde varchar2 parametre var mı diye kontrol eder. Varsa bu eşleşen parametreleri döner. 
+        /// </summary>
+        /// <param name="fileData">Dosya İçeriği</param>
+        /// <returns>vaarchar2 tipindeki parametreleri bir string array olarak döner. Eğer hiç varchar2 parametre yok ise o halde boş bir string array döner.</returns>
         public static string[] FindVarchar2Parameters(string fileData)
         {
             string pattern = @"[\w]*(?=\s+IN\s+VARCHAR2)";
@@ -107,8 +128,12 @@ namespace VakifInternship_2.controller
              
             return varchar2params;
         }
-
-        public static string[] FindUninjectableVarchar2Parameters(string fileData) //Burada SYS.DBMS_ASSERT.ENQUOTE_LITERAL metodu ile kullanılanları bulup bir listeye alır.
+        /// <summary>
+        /// Burada SYS.DBMS_ASSERT.ENQUOTE_LITERAL metodu ile kullanılan varchar2 parametreleri bulup bir diziye alır ve bu diziyi döndürür.
+        /// </summary>
+        /// <param name="fileData">Dosya İçeriği (string)</param>
+        /// <returns>varchar2 parametrelerden injection açığı olmayan parametreleri bir dizi olarak geri döndürür. Eğer hiçbiri ENQUOTE_LITERAL ile kullanılmadıysa boş bir stirng array döner. </returns>
+        public static string[] FindUninjectableVarchar2Parameters(string fileData) 
         {
             string pattern = @"(?<=SYS\.DBMS_ASSERT\.ENQUOTE_LITERAL\((\s+)?)[\w]+(?=(\s+)?\))";
             MatchCollection matches = Regex.Matches(fileData, pattern);
@@ -125,6 +150,13 @@ namespace VakifInternship_2.controller
 
             return uninjectablevarchar2params;
         }
+        /// <summary>
+        /// Kendisine parametre olarak verilen iki string array arasındaki farkları yeni bir string array olarak geri döndürür. 
+        /// (Aslında yaptığı işlem ilk array fark ikinci array.) Eğer ikinci array boş ise yani hiçbir parametre uninjectionable değilse bu durumda birinci diziyi komple dönmüş olur yani tüm varchar2 parametreler sömürülebililr demek bu.
+        /// </summary>
+        /// <param name="varchar2params">Injection edilmeye açık parametreler</param>
+        /// <param name="uninjvarchar2params">Injection açığı olmayan parametreler</param>
+        /// <returns>varchar2 parametrelerden injection açığı olmayan parametreleri bir dizi olarak geri döndürür. Eğer hiçbiri ENQUOTE_LITERAL ile kullanılmadıysa boş bir stirng array döner. </returns>
 
         public static string[] FindInjectableVarchar2Params(string[] varchar2params, string[] uninjvarchar2params)
         {
