@@ -17,9 +17,22 @@ namespace VakifInternship_2.utils
 
         private Progress() { }
 
+        /// <summary>
+        /// Buil burayı kurmak için UI controllerda çağırılmalı. Daha sonra taikp edilecek process tanımlanmadan önce SetNewProcess çağırılmalı!
+        /// </summary>
+        /// <param name="progressBar"></param>
+        /// <param name="totalProcessAmount"></param>
         public static void Build(ProgressBar progressBar) {
             _progress = new Progress();
             _progressBar = progressBar;
+        }
+        /// <summary>
+        /// Bu fonksiyon process başlamadan önce çağğırılmalı. Yapılacak işlemin hangi adımları takip edilmek isteniyorsa ve bu adım sayısı (işlem sayısı) atanmalı.
+        /// </summary>
+        /// <param name="totalProcessAmount">Toplam yapılacak işlem (adım) sayısı</param>
+        public static void SetNewProcess(int totalProcessAmount)
+        {
+            _totalProcessAmount = totalProcessAmount;
         }
 
         public static Progress GetInstance()
