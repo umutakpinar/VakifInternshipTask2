@@ -26,7 +26,7 @@ namespace VakifInternship_2.view
         {
             UIController controller = new UIController();
             controller.SelectPath(tbxInput);
-            controller.RefreshScreen(dataGridView1,tbxInput);
+            controller.RefreshScreen(dataGridView1, tbxInput);
         }
     }
 }

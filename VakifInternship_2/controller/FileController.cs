@@ -41,17 +41,20 @@ namespace VakifInternship_2.controller
         /// <returns>FileModel tipinde öğeler barındıran bir Liste döner.</returns>
         public List<FileModel> CheckFilesInsideDirectory(string directoryPath)
         {  
+            if(directoryPath == null)
+            {
                 DirectoryInfo dirInf = new DirectoryInfo(directoryPath);
                 FileInfo[] fileInfos = dirInf.GetFiles();
                 foreach (FileInfo fileInfo in fileInfos)
                 {
                     string fileName = fileInfo.Name;
                     string filePath = fileInfo.FullName;
-                    if (filePath.EndsWith(".prc")) 
+                    if (filePath.EndsWith(".prc"))
                     {
                         _fileList.Add(CheckFile(fileName, filePath));
                     }
                 }
+            }
             return _fileList;
 
         }

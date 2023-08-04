@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainPageView));
@@ -43,6 +44,8 @@
             this.btnSelectPath = new System.Windows.Forms.Button();
             this.tableLayoutPanelTopBarTextBox = new System.Windows.Forms.TableLayoutPanel();
             this.tbxInput = new System.Windows.Forms.TextBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.lblPercentage = new System.Windows.Forms.Label();
             this.tableLayout.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -179,6 +182,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 55.55556F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22.22222F));
             this.tableLayoutPanel2.Controls.Add(this.headerLayoutPanel, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.lblPercentage, 2, 0);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
@@ -273,6 +277,20 @@
             this.tbxInput.Size = new System.Drawing.Size(591, 49);
             this.tbxInput.TabIndex = 7;
             // 
+            // lblPercentage
+            // 
+            this.lblPercentage.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblPercentage.AutoSize = true;
+            this.lblPercentage.Font = new System.Drawing.Font("Consolas", 20F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPercentage.Location = new System.Drawing.Point(1105, 0);
+            this.lblPercentage.Name = "lblPercentage";
+            this.lblPercentage.Size = new System.Drawing.Size(310, 109);
+            this.lblPercentage.TabIndex = 6;
+            this.lblPercentage.Text = "%0";
+            this.lblPercentage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // MainPageView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -317,5 +335,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelBottomBarCenter;
         private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.RichTextBox tbxLog;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Label lblPercentage;
     }
 }
