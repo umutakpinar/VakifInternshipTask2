@@ -157,7 +157,6 @@ namespace VakifInternship_2.controller
         /// <param name="varchar2params">Injection edilmeye açık parametreler</param>
         /// <param name="uninjvarchar2params">Injection açığı olmayan parametreler</param>
         /// <returns>varchar2 parametrelerden injection açığı olmayan parametreleri bir dizi olarak geri döndürür. Eğer hiçbiri ENQUOTE_LITERAL ile kullanılmadıysa boş bir stirng array döner. </returns>
-
         public static string[] FindInjectableVarchar2Params(string[] varchar2params, string[] uninjvarchar2params)
         {
             return varchar2params.Except(uninjvarchar2params).ToArray();
