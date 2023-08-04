@@ -11,8 +11,9 @@ namespace VakifInternship_2.controller
 {
     internal class UIController
     {
-        public UIController(RichTextBox tbxLog) {
-            Logger logger = Logger.Build(tbxLog);
+        public UIController(RichTextBox tbxLog, ProgressBar progresbar) {
+            Logger.Build(tbxLog);
+            utils.Progress.Build(progresbar);
         }
 
         /// <summary>
@@ -35,7 +36,7 @@ namespace VakifInternship_2.controller
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error : " + selectedPath);
+                MessageBox.Show("Error : " + ex.Message);
             }
             tbxInput.Text = selectedPath;
         }
