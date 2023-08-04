@@ -11,6 +11,10 @@ namespace VakifInternship_2.controller
 {
     internal class UIController
     {
+        public UIController(RichTextBox tbxLog) {
+            Logger logger = Logger.Build(tbxLog);
+        }
+
         /// <summary>
         /// Ekrandaki DataGridView ve TextBox componentlerinin instance'ını alır. Bunları LoadData fonksiyonuna gönderir.
         /// </summary>

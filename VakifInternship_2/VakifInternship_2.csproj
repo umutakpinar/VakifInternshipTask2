@@ -69,10 +69,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="controller\FileController.cs" />
+    <Compile Include="utils\Logger.cs" />
     <Compile Include="controller\UIController.cs" />
     <Compile Include="model\FileModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="utils\EMessageType.cs" />
+    <Compile Include="utils\Progress.cs" />
     <Compile Include="view\MainPageView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -92,8 +95,6 @@
     <EmbeddedResource Include="view\MainPageView.resx">
       <DependentUpon>MainPageView.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="example_rpcs\dynamic_list_procedure.prc" />
-    <None Include="example_rpcs\read_procedure.prc" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

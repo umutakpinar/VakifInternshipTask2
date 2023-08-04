@@ -16,17 +16,17 @@ namespace VakifInternship_2.view
 
     public partial class MainPageView : Form
     {
-
+        UIController _controller;
         public MainPageView()
         {
             InitializeComponent();
+            _controller = new UIController(tbxLog);
         }
 
         private void btnSelectPath_Click(object sender, EventArgs e)
         {
-            UIController controller = new UIController();
-            controller.SelectPath(tbxInput);
-            controller.RefreshScreen(dataGridView1, tbxInput);
+            _controller.SelectPath(tbxInput);
+            _controller.RefreshScreen(dataGridView1, tbxInput);
         }
     }
 }
