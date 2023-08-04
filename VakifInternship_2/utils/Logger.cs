@@ -27,13 +27,23 @@ namespace VakifInternship_2.controller
             Logs = new List<string>();
             tbxLog = richTextBoxLog;
         }
-
-        public static Logger Build(RichTextBox richTextBoxLog) { 
+        /// <summary>
+        /// Logger sınıfını kurmak için bunuun bir kez başlatılması gereklidir. Daha sonra bu sınıftan nesne almak için GetInstance() metodu kullanılabilir.
+        /// </summary>
+        /// <param name="richTextBoxLog"></param>
+        public static void Build(RichTextBox richTextBoxLog) { 
             
             if(_logger == null)
             {
                 _logger = new Logger(richTextBoxLog);
             }
+        }
+        /// <summary>
+        /// Logger classından bir nesne verir.
+        /// </summary>
+        /// <returns> Dikkat! Eğer bu metodu kullanamdan önce Logger.Build() çağırılmadıysa GetInstance() metodu null döner.</returns>
+        public static Logger GetInstance()
+        {
             return _logger;
         }
 
@@ -46,7 +56,7 @@ namespace VakifInternship_2.controller
         /// <summary>
         /// Log kayıtlarını temizler. Ekranda gösterilen Log kayıtlarını da temizler.
         /// </summary>
-        private static void ClearLogs()
+        public void ClearLogs()
         {
             Logs.Clear();
             tbxLog.Clear();
@@ -63,7 +73,7 @@ namespace VakifInternship_2.controller
         /// <param name="messageType">Eğer herhangi bir log kaydı basacaksan lütfen Unknown seçin.</param>
         /// <param name="message">Zorunlu değil. boş bırakılabilir.</param>
         /// <returns>The sum of a and b.</returns>
-        private static void Log(EMessageType.MessageType messageType, string filename = null, string message = "")
+        public void Log(EMessageType.MessageType messageType, string filename = null, string message = "")
         {
             string log = "";
             switch (messageType)
@@ -95,7 +105,7 @@ namespace VakifInternship_2.controller
         /// <summary>
         /// Log'a yeni bir değer eklendiğinde textBox'u uyarmak için.
         /// </summary>
-        static void NotifyTextBox()
+        private static void NotifyTextBox()
         {
             tbxLog.Text += $"\n{Logs[Logs.Count - 1]}";
         }
