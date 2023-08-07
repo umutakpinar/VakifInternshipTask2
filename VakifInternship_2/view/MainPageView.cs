@@ -20,13 +20,24 @@ namespace VakifInternship_2.view
         public MainPageView()
         {
             InitializeComponent();
-            _controller = new UIController(tbxLog);
         }
 
         private void btnSelectPath_Click(object sender, EventArgs e)
         {
+            //UIController.Reset();
+            _controller = new UIController(tbxLog, progressBar);
             _controller.SelectPath(tbxInput);
             _controller.RefreshScreen(dataGridView1, tbxInput);
+        }
+
+        private void MainPageView_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MainPageView_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            
         }
     }
 }

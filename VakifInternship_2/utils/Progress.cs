@@ -44,7 +44,10 @@ namespace VakifInternship_2.utils
         {
             _completedProcesses++;
             _processPercentage = CalculateProgress();
-            _progressBar.Value = (int)_processPercentage;
+            Application.OpenForms[0].Invoke(new Action(() =>
+            {
+                _progressBar.Value = (int)_processPercentage;
+            }));
 
         }
 
@@ -56,7 +59,10 @@ namespace VakifInternship_2.utils
         public void ResetProgress()
         {
             _completedProcesses = 0;
-            _progressBar.Value = 0;
+            Application.OpenForms[0].Invoke(new Action(() =>
+            {
+                _progressBar.Value = 0;
+            }));
             _progress = null;
             _completedProcesses = 0;
         }

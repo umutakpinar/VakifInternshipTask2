@@ -23,7 +23,6 @@ namespace VakifInternship_2.controller
         /// <param name="richTextBoxLog">Evet Logger'ı UI'da hangi richtexbox''ta göstereceksen onun nesnesi gerekli</param>
         private Logger(RichTextBox richTextBoxLog)
         {
-            _logger = new Logger(richTextBoxLog);
             Logs = new List<string>();
             tbxLog = richTextBoxLog;
         }
@@ -107,7 +106,10 @@ namespace VakifInternship_2.controller
         /// </summary>
         private static void NotifyTextBox()
         {
-            tbxLog.Text += $"\n{Logs[Logs.Count - 1]}";
+            Application.OpenForms[0].Invoke(new Action(() => {
+                tbxLog.AppendText($"\n{Logs[Logs.Count - 1]}");
+            }));
+            
         }
     }
 }

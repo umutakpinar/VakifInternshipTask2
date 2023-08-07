@@ -7,6 +7,7 @@ using System.IO;
 using System.Windows.Forms;
 using VakifInternship_2.model;
 using System.Text.RegularExpressions;
+using System.Diagnostics;
 
 namespace VakifInternship_2.controller
 {
@@ -41,10 +42,13 @@ namespace VakifInternship_2.controller
         /// <returns>FileModel tipinde öğeler barındıran bir Liste döner.</returns>
         public List<FileModel> CheckFilesInsideDirectory(string directoryPath)
         {  
-            if(directoryPath == null)
+            if(directoryPath != "")
             {
                 DirectoryInfo dirInf = new DirectoryInfo(directoryPath);
+                Logger.GetInstance().Log(utils.EMessageType.MessageType.Started, "KLASÖR OKUNUYOR", $"Klasördeki tüm dosyalar okunuyor.");
                 FileInfo[] fileInfos = dirInf.GetFiles();
+                Logger.GetInstance().Log(utils.EMessageType.MessageType.End, "KLASÖR OKUMA İŞLEMİ TAMAMLANDI", $"Klasördeki tüm dosyalar okundu.");
+                utils.Progress.SetNewProcess(fileInfos.Length); //Burada Progress'ı kurdum
                 foreach (FileInfo fileInfo in fileInfos)
                 {
                     string fileName = fileInfo.Name;
@@ -53,8 +57,15 @@ namespace VakifInternship_2.controller
                     {
                         _fileList.Add(CheckFile(fileName, filePath));
                     }
+                    utils.Progress.GetInstance().IncreaseProgess();
                 }
+                Logger.GetInstance().Log(utils.EMessageType.MessageType.End, "TAMAMLANDI", $"Klasördeki tüm dosyalar tarandı.");
             }
+            else
+            {
+                Logger.GetInstance().Log(utils.EMessageType.MessageType.End, "TAMAMLANDI", $"Seçim iptal edildi.");
+            }
+            
             return _fileList;
 
         }
@@ -70,25 +81,36 @@ namespace VakifInternship_2.controller
         public FileModel CheckFile(string fileName, string filePath)
         {
             FileModel file = new FileModel(fileName, filePath);
+            Logger.GetInstance().Log(utils.EMessageType.MessageType.Started, fileName); //LOG KAYDI
+            Logger.GetInstance().Log(utils.EMessageType.MessageType.Process, fileName, "Dosya okunuyor.");
             string fileData = ReadFileData(file.FilePath);
+            Logger.GetInstance().Log(utils.EMessageType.MessageType.Process, fileName, "Dosya okundu.");
             file.IsDynmaicSP = IsDynamic(fileData);
 
             if (file.IsDynmaicSP) //dynamicSP ise içinde varchar2 var mı diye kontrol et
             {
+                Logger.GetInstance().Log(utils.EMessageType.MessageType.Process, fileName, "Dosya dinamik SP.");
+                Logger.GetInstance().Log(utils.EMessageType.MessageType.Process, fileName, "Dosyadaki varchar2 parametreleri aranıyor.");
                 string[] varchar2params = FindVarchar2Parameters(fileData); //içinde varchar2 parametreleri diziye at
                
                 if (varchar2params.Length > 0) //varsa injection yapılaiblir mi onu kontrol edelim
                 {
+                    Logger.GetInstance().Log(utils.EMessageType.MessageType.Process, fileName, "Dosyada varchar2 parametreler var.");
                     file.HasVarchar2 = true;
+                    Logger.GetInstance().Log(utils.EMessageType.MessageType.Process, fileName, "Dosyadaki uninjectable parametreler aranıyor...");
                     string[] uninjectableparams = FindUninjectableVarchar2Parameters(fileData);
-                    file.InjectableParameters = string.Join(",",FindInjectableVarchar2Params(varchar2params, uninjectableparams));
+                    Logger.GetInstance().Log(utils.EMessageType.MessageType.Process, fileName, $"Dosyada {uninjectableparams.Length} adet uninjectable parametre var.");
+                    string[] injectablevarchar2params = FindInjectableVarchar2Params(varchar2params, uninjectableparams);
+                    Logger.GetInstance().Log(utils.EMessageType.MessageType.Process, fileName, $"Dosyada {injectablevarchar2params.Length} adet SQL Injectable parametre var.");
+                    file.InjectableParameters = string.Join(",",injectablevarchar2params);
                 }
                 else
                 {
+                    Logger.GetInstance().Log(utils.EMessageType.MessageType.Process, fileName, "Dosyada varchar2 parametreler yok.");
                     file.HasVarchar2 = false;
                 }
-            } 
-
+            }
+            Logger.GetInstance().Log(utils.EMessageType.MessageType.End, fileName, "Dosya tarandı. İşlem tamamlandı.");
             return file;
         }
         /// <summary>

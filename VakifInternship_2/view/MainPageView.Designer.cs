@@ -290,6 +290,8 @@
             this.Name = "MainPageView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DSPAnalyzer";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainPageView_FormClosing);
+            this.Load += new System.EventHandler(this.MainPageView_Load);
             this.tableLayout.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
