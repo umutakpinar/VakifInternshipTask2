@@ -93,7 +93,7 @@ namespace VakifInternship_2.controller
                     break;
 
                 case EMessageType.MessageType.Unknown:
-                    log = $"\n\n___________________________\n{DateTime.Now} : \n{filename ?? "*MESAJ"}:\n{message}\n___________________________\n";
+                    log = $"\n\n___________________________\n\n{DateTime.Now} : \n{filename ?? "*MESAJ"}: {message}\n___________________________";
                     break;
 
                 default:

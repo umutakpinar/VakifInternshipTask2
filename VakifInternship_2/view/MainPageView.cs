@@ -24,10 +24,12 @@ namespace VakifInternship_2.view
 
         private void btnSelectPath_Click(object sender, EventArgs e)
         {
-            //UIController.Reset();
             _controller = new UIController(tbxLog, progressBar, lblProcessInfo);
             _controller.SelectPath(tbxInput);
-            _controller.RefreshScreen(dataGridView1, tbxInput, lblProcessInfo);
+            if (!string.IsNullOrEmpty(tbxInput.Text))
+            {
+                _controller.RefreshScreen(dataGridView1, tbxInput, lblProcessInfo);
+            }
         }
 
         private void MainPageView_Load(object sender, EventArgs e)

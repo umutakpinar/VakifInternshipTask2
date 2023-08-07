@@ -57,6 +57,7 @@ namespace VakifInternship_2.controller
         public async static void LoadData(DataGridView dataGrid, TextBox tbx, Label lblProcessInfo)
         {
             FileController controller = new FileController();
+            Reset();
             try
             {
                 lblProcessInfo.ForeColor = Color.Orange;
@@ -65,6 +66,10 @@ namespace VakifInternship_2.controller
                 dataGrid.DataSource = data;
                 lblProcessInfo.ForeColor = Color.Green;
                 lblProcessInfo.Text = "COMPLETED";
+                if(dataGrid.RowCount > 0 )
+                {
+                    HighlightInjectableRows(dataGrid);
+                }
             }
             catch (Exception ex)
             {
@@ -84,7 +89,7 @@ namespace VakifInternship_2.controller
             dataGrid.Rows[0].Cells[0].Selected = false;
             for (int i = 0; i < dataGrid.Rows.Count; i++)
             {
-                if (!(dataGrid.Rows[i].Cells[4].Value == null || dataGrid.Rows[i].Cells[4].Value == ""))
+                if (!(dataGrid.Rows[i].Cells[4].Value == null || dataGrid.Rows[i].Cells[4].Value.ToString() == ""))
                 {
                     dataGrid.Rows[i].Selected = true;
                 }

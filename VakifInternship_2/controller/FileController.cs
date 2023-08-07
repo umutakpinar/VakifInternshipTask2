@@ -59,7 +59,7 @@ namespace VakifInternship_2.controller
                     }
                     utils.Progress.GetInstance().IncreaseProgess();
                 }
-                Logger.GetInstance().Log(utils.EMessageType.MessageType.End, "TAMAMLANDI", $"Klasördeki tüm dosyalar tarandı.");
+                Logger.GetInstance().Log(utils.EMessageType.MessageType.Unknown, "TAMAMLANDI", $"Klasördeki {_fileList.Count} dosya tarandı.");
             }
             else
             {
