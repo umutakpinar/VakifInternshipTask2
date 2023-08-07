@@ -7,14 +7,15 @@ using System.Threading.Tasks;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Threading;
+using VakifInternship_2.model;
 
 namespace VakifInternship_2.controller
 {
     internal class UIController
     {
-        public UIController(RichTextBox tbxLog, ProgressBar progresbar) {
+        public UIController(RichTextBox tbxLog, ProgressBar progresbar, Label lblProcessInfo) {
             Logger.Build(tbxLog);
-            utils.Progress.Build(progresbar);
+            utils.Progress.Build(progresbar, lblProcessInfo);
         }
 
         public static void Reset()
@@ -26,9 +27,9 @@ namespace VakifInternship_2.controller
         /// <summary>
         /// Ekrandaki DataGridView ve TextBox componentlerinin instance'ını alır. Bunları LoadData fonksiyonuna gönderir.
         /// </summary>
-        public void RefreshScreen(DataGridView dataGrid, TextBox tbx)
+        public void RefreshScreen(DataGridView dataGrid, TextBox tbx, Label lblProcessInfo)
         {
-            LoadData(dataGrid,tbx);
+            LoadData(dataGrid,tbx, lblProcessInfo);
         }
         /// <summary>
         /// Kullanıcnın seçtiği pathi TextBox componentinde gösterir. Eğer path'te bir hata varsa string.Empty gösterir. MessageBox ile hatayı ekrana basar.
@@ -53,23 +54,22 @@ namespace VakifInternship_2.controller
         /// UI'ı kilitlememek için yeni bir thread'de işlemi yapıyor.
         /// (Öğrendiğim kadarıyla bir UI elementine erişmek için MainThread'e geri dönmek gerkiyormuş. Bu nedenle bazı yerlerde Form1'i yeniden invoke etmem gerekti.)
         /// </summary>
-        public async static void LoadData(DataGridView dataGrid, TextBox tbx)
+        public async static void LoadData(DataGridView dataGrid, TextBox tbx, Label lblProcessInfo)
         {
             FileController controller = new FileController();
             try
             {
-                dataGrid.DataSource = await Task.Run(() => controller.CheckFilesInsideDirectory(tbx.Text));
-                if (dataGrid.RowCount > 0)
-                {
-                    HighlightInjectableRows(dataGrid);
-                }
-                else
-                {
-                    MessageBox.Show($"Selection cancelled.");
-                }
+                lblProcessInfo.ForeColor = Color.Orange;
+                lblProcessInfo.Text = "PROCESSING";
+                var data  = await Task.Run(() => controller.CheckFilesInsideDirectory(tbx.Text));
+                dataGrid.DataSource = data;
+                lblProcessInfo.ForeColor = Color.Green;
+                lblProcessInfo.Text = "COMPLETED";
             }
             catch (Exception ex)
             {
+                lblProcessInfo.ForeColor = SystemColors.ActiveCaption;
+                lblProcessInfo.Text = "WAITING";
                 MessageBox.Show(ex.Message);
             }
             

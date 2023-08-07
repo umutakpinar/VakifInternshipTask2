@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -57,8 +58,10 @@ namespace VakifInternship_2.controller
         /// </summary>
         public void ClearLogs()
         {
-            Logs.Clear();
-            tbxLog.Clear();
+            Application.OpenForms[0].Invoke(new Action(() => {
+                Logs.Clear();
+                tbxLog.Clear();
+            }));
         }
 
         /// <summary>
@@ -107,6 +110,7 @@ namespace VakifInternship_2.controller
         private static void NotifyTextBox()
         {
             Application.OpenForms[0].Invoke(new Action(() => {
+                tbxLog.HideSelection = false;
                 tbxLog.AppendText($"\n{Logs[Logs.Count - 1]}");
             }));
             

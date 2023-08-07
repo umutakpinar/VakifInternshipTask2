@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace VakifInternship_2.utils
@@ -13,6 +14,7 @@ namespace VakifInternship_2.utils
         private static double _processPercentage = 0.0;
         private static int _totalProcessAmount = 0;
         private static int _completedProcesses = 0;
+        private static Label _lblProcessInfo;
         private static ProgressBar _progressBar;
 
         private Progress() { }
@@ -22,9 +24,10 @@ namespace VakifInternship_2.utils
         /// </summary>
         /// <param name="progressBar"></param>
         /// <param name="totalProcessAmount"></param>
-        public static void Build(ProgressBar progressBar) {
+        public static void Build(ProgressBar progressBar, Label lblProcessInfo) {
             _progress = new Progress();
             _progressBar = progressBar;
+            _lblProcessInfo = lblProcessInfo;
         }
         /// <summary>
         /// Bu fonksiyon process başlamadan önce çağğırılmalı. Yapılacak işlemin hangi adımları takip edilmek isteniyorsa ve bu adım sayısı (işlem sayısı) atanmalı.
@@ -47,6 +50,10 @@ namespace VakifInternship_2.utils
             Application.OpenForms[0].Invoke(new Action(() =>
             {
                 _progressBar.Value = (int)_processPercentage;
+                if(_progressBar.Value > 95) {
+                    _lblProcessInfo.ForeColor = Color.Blue;
+                    _lblProcessInfo.Text = "LOADING";
+                }
             }));
 
         }

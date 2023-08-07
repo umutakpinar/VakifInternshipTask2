@@ -45,6 +45,7 @@
             this.tableLayoutPanelTopBarTextBox = new System.Windows.Forms.TableLayoutPanel();
             this.tbxInput = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.lblProcessInfo = new System.Windows.Forms.Label();
             this.tableLayout.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -182,6 +183,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 55.55556F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22.22222F));
             this.tableLayoutPanel2.Controls.Add(this.headerLayoutPanel, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.lblProcessInfo, 0, 0);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
@@ -276,6 +278,21 @@
             this.tbxInput.Size = new System.Drawing.Size(591, 49);
             this.tbxInput.TabIndex = 7;
             // 
+            // lblProcessInfo
+            // 
+            this.lblProcessInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblProcessInfo.AutoSize = true;
+            this.lblProcessInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblProcessInfo.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.lblProcessInfo.Location = new System.Drawing.Point(3, 0);
+            this.lblProcessInfo.Name = "lblProcessInfo";
+            this.lblProcessInfo.Size = new System.Drawing.Size(309, 109);
+            this.lblProcessInfo.TabIndex = 6;
+            this.lblProcessInfo.Text = "WAITING";
+            this.lblProcessInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // MainPageView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -323,5 +340,6 @@
         private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.RichTextBox tbxLog;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Label lblProcessInfo;
     }
 }
