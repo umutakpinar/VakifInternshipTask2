@@ -40,19 +40,17 @@
             this.tbxLog = new System.Windows.Forms.RichTextBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.headerLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanelTopBarButton = new System.Windows.Forms.TableLayoutPanel();
             this.btnSelectPath = new System.Windows.Forms.Button();
             this.tableLayoutPanelTopBarTextBox = new System.Windows.Forms.TableLayoutPanel();
             this.tbxInput = new System.Windows.Forms.TextBox();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.lblProcessInfo = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tableLayout.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanelBottomBarCenter.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.headerLayoutPanel.SuspendLayout();
-            this.tableLayoutPanelTopBarButton.SuspendLayout();
             this.tableLayoutPanelTopBarTextBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -182,6 +180,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22.22222F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 55.55556F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22.22222F));
+            this.tableLayoutPanel2.Controls.Add(this.btnSelectPath, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.headerLayoutPanel, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.lblProcessInfo, 0, 0);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
@@ -198,10 +197,8 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.headerLayoutPanel.AutoSize = true;
             this.headerLayoutPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.headerLayoutPanel.ColumnCount = 2;
+            this.headerLayoutPanel.ColumnCount = 1;
             this.headerLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 77.77778F));
-            this.headerLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22.22222F));
-            this.headerLayoutPanel.Controls.Add(this.tableLayoutPanelTopBarButton, 1, 0);
             this.headerLayoutPanel.Controls.Add(this.tableLayoutPanelTopBarTextBox, 0, 0);
             this.headerLayoutPanel.Location = new System.Drawing.Point(318, 3);
             this.headerLayoutPanel.Name = "headerLayoutPanel";
@@ -209,24 +206,6 @@
             this.headerLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.headerLayoutPanel.Size = new System.Drawing.Size(781, 103);
             this.headerLayoutPanel.TabIndex = 5;
-            // 
-            // tableLayoutPanelTopBarButton
-            // 
-            this.tableLayoutPanelTopBarButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanelTopBarButton.ColumnCount = 1;
-            this.tableLayoutPanelTopBarButton.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanelTopBarButton.Controls.Add(this.btnSelectPath, 0, 1);
-            this.tableLayoutPanelTopBarButton.Location = new System.Drawing.Point(610, 3);
-            this.tableLayoutPanelTopBarButton.Name = "tableLayoutPanelTopBarButton";
-            this.tableLayoutPanelTopBarButton.RowCount = 3;
-            this.tableLayoutPanelTopBarButton.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanelTopBarButton.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanelTopBarButton.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanelTopBarButton.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelTopBarButton.Size = new System.Drawing.Size(168, 97);
-            this.tableLayoutPanelTopBarButton.TabIndex = 5;
             // 
             // btnSelectPath
             // 
@@ -240,11 +219,11 @@
             this.btnSelectPath.FlatAppearance.BorderSize = 0;
             this.btnSelectPath.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnSelectPath.Font = new System.Drawing.Font("Cascadia Code", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSelectPath.Location = new System.Drawing.Point(5, 32);
+            this.btnSelectPath.Location = new System.Drawing.Point(1107, 3);
             this.btnSelectPath.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.btnSelectPath.MinimumSize = new System.Drawing.Size(0, 38);
             this.btnSelectPath.Name = "btnSelectPath";
-            this.btnSelectPath.Size = new System.Drawing.Size(158, 38);
+            this.btnSelectPath.Size = new System.Drawing.Size(306, 103);
             this.btnSelectPath.TabIndex = 6;
             this.btnSelectPath.Text = "Select Path";
             this.btnSelectPath.UseVisualStyleBackColor = false;
@@ -264,7 +243,7 @@
             this.tableLayoutPanelTopBarTextBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.tableLayoutPanelTopBarTextBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
             this.tableLayoutPanelTopBarTextBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanelTopBarTextBox.Size = new System.Drawing.Size(601, 97);
+            this.tableLayoutPanelTopBarTextBox.Size = new System.Drawing.Size(775, 97);
             this.tableLayoutPanelTopBarTextBox.TabIndex = 6;
             // 
             // tbxInput
@@ -275,7 +254,7 @@
             this.tbxInput.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.tbxInput.Name = "tbxInput";
             this.tbxInput.ReadOnly = true;
-            this.tbxInput.Size = new System.Drawing.Size(591, 49);
+            this.tbxInput.Size = new System.Drawing.Size(765, 49);
             this.tbxInput.TabIndex = 7;
             // 
             // lblProcessInfo
@@ -292,6 +271,7 @@
             this.lblProcessInfo.TabIndex = 6;
             this.lblProcessInfo.Text = "WAITING";
             this.lblProcessInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblProcessInfo.TextChanged += new System.EventHandler(this.lblProcessInfo_TextChanged);
             // 
             // MainPageView
             // 
@@ -307,8 +287,6 @@
             this.Name = "MainPageView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DSPAnalyzer";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainPageView_FormClosing);
-            this.Load += new System.EventHandler(this.MainPageView_Load);
             this.tableLayout.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -316,8 +294,6 @@
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             this.headerLayoutPanel.ResumeLayout(false);
-            this.tableLayoutPanelTopBarButton.ResumeLayout(false);
-            this.tableLayoutPanelTopBarButton.PerformLayout();
             this.tableLayoutPanelTopBarTextBox.ResumeLayout(false);
             this.tableLayoutPanelTopBarTextBox.PerformLayout();
             this.ResumeLayout(false);
@@ -332,7 +308,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TableLayoutPanel headerLayoutPanel;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanelTopBarButton;
         private System.Windows.Forms.Button btnSelectPath;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelTopBarTextBox;
         private System.Windows.Forms.TextBox tbxInput;

@@ -17,6 +17,7 @@ namespace VakifInternship_2.view
     public partial class MainPageView : Form
     {
         UIController _controller;
+        
         public MainPageView()
         {
             InitializeComponent();
@@ -32,14 +33,14 @@ namespace VakifInternship_2.view
             }
         }
 
-        private void MainPageView_Load(object sender, EventArgs e)
+        private void lblProcessInfo_TextChanged(object sender, EventArgs e)
         {
 
-        }
-
-        private void MainPageView_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            
+            if(lblProcessInfo.Text == "COMPLETED")
+            {
+                dataGridView1.Columns.Remove("IsDynamicSP");
+                dataGridView1.Columns.Remove("HasVarChar2");
+            }
         }
     }
 }

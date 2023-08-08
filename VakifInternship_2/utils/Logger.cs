@@ -59,8 +59,8 @@ namespace VakifInternship_2.controller
         public void ClearLogs()
         {
             Application.OpenForms[0].Invoke(new Action(() => {
-                Logs.Clear();
                 tbxLog.Clear();
+                Logs.Clear();
             }));
         }
 
@@ -115,5 +115,6 @@ namespace VakifInternship_2.controller
             }));
             
         }
+
     }
 }

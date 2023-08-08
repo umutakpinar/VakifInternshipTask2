@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -25,7 +21,10 @@ namespace VakifInternship_2.utils
         /// <param name="progressBar"></param>
         /// <param name="totalProcessAmount"></param>
         public static void Build(ProgressBar progressBar, Label lblProcessInfo) {
-            _progress = new Progress();
+            if(_progress == null)
+            {
+                _progress = new Progress();
+            }
             _progressBar = progressBar;
             _lblProcessInfo = lblProcessInfo;
         }
@@ -50,7 +49,7 @@ namespace VakifInternship_2.utils
             Application.OpenForms[0].Invoke(new Action(() =>
             {
                 _progressBar.Value = (int)_processPercentage;
-                if(_progressBar.Value > 95) {
+                if(_progressBar.Value >= 99) {
                     _lblProcessInfo.ForeColor = Color.Blue;
                     _lblProcessInfo.Text = "LOADING";
                 }
@@ -65,12 +64,14 @@ namespace VakifInternship_2.utils
 
         public void ResetProgress()
         {
-            _completedProcesses = 0;
             Application.OpenForms[0].Invoke(new Action(() =>
             {
+                _lblProcessInfo.ForeColor = SystemColors.ActiveCaption;
+                _lblProcessInfo.Text = "WAITING";
                 _progressBar.Value = 0;
             }));
-            _progress = null;
+            _processPercentage = 0.0;
+            _totalProcessAmount = 0;
             _completedProcesses = 0;
         }
     }

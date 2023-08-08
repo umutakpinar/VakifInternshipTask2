@@ -13,15 +13,19 @@ namespace VakifInternship_2.controller
 {
     internal class UIController
     {
+        private bool _initialStart = true;
         public UIController(RichTextBox tbxLog, ProgressBar progresbar, Label lblProcessInfo) {
             Logger.Build(tbxLog);
             utils.Progress.Build(progresbar, lblProcessInfo);
+            _initialStart = false;
         }
-
+        /// <summary>
+        /// Bir tarama işlemi tamamlandıktan sonra yeni bir işlem başşlatılmadan önce kullanılır.
+        /// </summary>
         public static void Reset()
         {
-            Logger.GetInstance().ClearLogs();
             utils.Progress.GetInstance().ResetProgress();
+            Logger.GetInstance().ClearLogs();
         }
 
         /// <summary>
@@ -33,9 +37,14 @@ namespace VakifInternship_2.controller
         }
         /// <summary>
         /// Kullanıcnın seçtiği pathi TextBox componentinde gösterir. Eğer path'te bir hata varsa string.Empty gösterir. MessageBox ile hatayı ekrana basar.
+        /// Ayrıca işlem tamamlanıp yeniden bir işlem yapılmak istenirse gösterilen bilgileri reset eder.
         /// </summary>
         public void SelectPath(TextBox tbxInput)
         {
+            if(!_initialStart)
+            {
+                Reset();
+            }
             string selectedPath = string.Empty;
 
             try
@@ -57,12 +66,11 @@ namespace VakifInternship_2.controller
         public async static void LoadData(DataGridView dataGrid, TextBox tbx, Label lblProcessInfo)
         {
             FileController controller = new FileController();
-            Reset();
             try
             {
                 lblProcessInfo.ForeColor = Color.Orange;
                 lblProcessInfo.Text = "PROCESSING";
-                var data  = await Task.Run(() => controller.CheckFilesInsideDirectory(tbx.Text));
+                List<FileModel> data  = await Task.Run(() => controller.CheckFilesInsideDirectory(tbx.Text));
                 dataGrid.DataSource = data;
                 lblProcessInfo.ForeColor = Color.Green;
                 lblProcessInfo.Text = "COMPLETED";
@@ -89,7 +97,7 @@ namespace VakifInternship_2.controller
             dataGrid.Rows[0].Cells[0].Selected = false;
             for (int i = 0; i < dataGrid.Rows.Count; i++)
             {
-                if (!(dataGrid.Rows[i].Cells[4].Value == null || dataGrid.Rows[i].Cells[4].Value.ToString() == ""))
+                if (!(dataGrid.Rows[i].Cells["InjectableParameters"].Value == null || dataGrid.Rows[i].Cells["InjectableParameters"].Value.ToString() == ""))
                 {
                     dataGrid.Rows[i].Selected = true;
                 }

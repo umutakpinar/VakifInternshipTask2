@@ -14,9 +14,11 @@ namespace VakifInternship_2.controller
     internal class FileController
     {
         private List<FileModel> _fileList;
+        private List<FileModel> _fileListInjectables;
         public FileController() 
         {
             _fileList = new List<FileModel>();
+            _fileListInjectables = new List<FileModel>();
         }
         /// <summary>
         /// Kullanıcıdan bir klasör seçmesini ister ve klasör yolunu döndürür.
@@ -55,18 +57,26 @@ namespace VakifInternship_2.controller
                     string filePath = fileInfo.FullName;
                     if (filePath.EndsWith(".prc"))
                     {
-                        _fileList.Add(CheckFile(fileName, filePath));
+                        var x = CheckFile(fileName, filePath);
+                        if (!string.IsNullOrEmpty(x.InjectableParameters))
+                        {
+                            _fileListInjectables.Add(x);
+                        }
+                        else
+                        {
+                            _fileList.Add(x);
+                        }
                     }
                     utils.Progress.GetInstance().IncreaseProgess();
                 }
-                Logger.GetInstance().Log(utils.EMessageType.MessageType.Unknown, "TAMAMLANDI", $"Klasördeki {_fileList.Count} dosya tarandı.");
+                Logger.GetInstance().Log(utils.EMessageType.MessageType.Unknown, "TAMAMLANDI", $"Klasördeki {_fileList.Count + _fileListInjectables.Count} dosya içerisinde {_fileListInjectables.Count} dosyada SQL Injection saptandı.");
             }
             else
             {
                 Logger.GetInstance().Log(utils.EMessageType.MessageType.End, "TAMAMLANDI", $"Seçim iptal edildi.");
             }
             
-            return _fileList;
+            return _fileListInjectables;
 
         }
         /// <summary>
@@ -85,9 +95,9 @@ namespace VakifInternship_2.controller
             Logger.GetInstance().Log(utils.EMessageType.MessageType.Process, fileName, "Dosya okunuyor.");
             string fileData = ReadFileData(file.FilePath);
             Logger.GetInstance().Log(utils.EMessageType.MessageType.Process, fileName, "Dosya okundu.");
-            file.IsDynmaicSP = IsDynamic(fileData);
+            file.IsDynamicSP = IsDynamic(fileData);
 
-            if (file.IsDynmaicSP) //dynamicSP ise içinde varchar2 var mı diye kontrol et
+            if (file.IsDynamicSP) //dynamicSP ise içinde varchar2 var mı diye kontrol et
             {
                 Logger.GetInstance().Log(utils.EMessageType.MessageType.Process, fileName, "Dosya dinamik SP.");
                 Logger.GetInstance().Log(utils.EMessageType.MessageType.Process, fileName, "Dosyadaki varchar2 parametreleri aranıyor.");

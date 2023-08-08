@@ -10,7 +10,7 @@ namespace VakifInternship_2.model
     {
         private string _fileName;
         private string _filePath;
-        private bool _IsDynamicSP;
+        private bool _isDynamicSP;
         private bool _hasVarchar2;
         private string _injectableParameters;
         
@@ -40,15 +40,15 @@ namespace VakifInternship_2.model
                 _filePath = value;
             } 
         }
-        public bool IsDynmaicSP
+        public bool IsDynamicSP
         {
             get
             {
-                return _IsDynamicSP;
+                return _isDynamicSP;
             }
             set
             {
-                _IsDynamicSP = value;
+                _isDynamicSP = value;
             }
         }
         public bool HasVarchar2 {
