@@ -17,7 +17,8 @@ namespace VakifInternship_2.view
     public partial class MainPageView : Form
     {
         UIController _controller;
-        
+        [DllImport("user32.dll")]
+        private static extern bool FlashWindow(IntPtr hwnd, bool bInvert);
         public MainPageView()
         {
             InitializeComponent();
@@ -55,6 +56,7 @@ namespace VakifInternship_2.view
                 btnSelectPath.BackColor = Color.FromArgb(255,255,128,0);
                 if (lblProcessInfo.Text == "COMPLETED")
                 {
+                    FlashWindow(this.Handle, true);
                     dataGridView1.Columns.Remove("IsDynamicSP");
                     dataGridView1.Columns.Remove("HasVarChar2");
                 }
