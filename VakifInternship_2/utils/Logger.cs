@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using VakifInternship_2.utils;
+using VakifInternship_2.view;
 
 namespace VakifInternship_2.controller
 {
@@ -113,7 +114,7 @@ namespace VakifInternship_2.controller
                 tbxLog.HideSelection = false;
                 tbxLog.AppendText($"\n{Logs[Logs.Count - 1]}");
             }));
-            
+
         }
 
     }

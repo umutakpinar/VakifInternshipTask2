@@ -39,8 +39,8 @@
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.tbxLog = new System.Windows.Forms.RichTextBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.headerLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.btnSelectPath = new System.Windows.Forms.Button();
+            this.headerLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanelTopBarTextBox = new System.Windows.Forms.TableLayoutPanel();
             this.tbxInput = new System.Windows.Forms.TextBox();
             this.lblProcessInfo = new System.Windows.Forms.Label();
@@ -190,23 +190,6 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(1418, 109);
             this.tableLayoutPanel2.TabIndex = 6;
             // 
-            // headerLayoutPanel
-            // 
-            this.headerLayoutPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.headerLayoutPanel.AutoSize = true;
-            this.headerLayoutPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.headerLayoutPanel.ColumnCount = 1;
-            this.headerLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 77.77778F));
-            this.headerLayoutPanel.Controls.Add(this.tableLayoutPanelTopBarTextBox, 0, 0);
-            this.headerLayoutPanel.Location = new System.Drawing.Point(318, 3);
-            this.headerLayoutPanel.Name = "headerLayoutPanel";
-            this.headerLayoutPanel.RowCount = 1;
-            this.headerLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.headerLayoutPanel.Size = new System.Drawing.Size(781, 103);
-            this.headerLayoutPanel.TabIndex = 5;
-            // 
             // btnSelectPath
             // 
             this.btnSelectPath.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -228,6 +211,23 @@
             this.btnSelectPath.Text = "Select Path";
             this.btnSelectPath.UseVisualStyleBackColor = false;
             this.btnSelectPath.Click += new System.EventHandler(this.btnSelectPath_Click);
+            // 
+            // headerLayoutPanel
+            // 
+            this.headerLayoutPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.headerLayoutPanel.AutoSize = true;
+            this.headerLayoutPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.headerLayoutPanel.ColumnCount = 1;
+            this.headerLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 77.77778F));
+            this.headerLayoutPanel.Controls.Add(this.tableLayoutPanelTopBarTextBox, 0, 0);
+            this.headerLayoutPanel.Location = new System.Drawing.Point(318, 3);
+            this.headerLayoutPanel.Name = "headerLayoutPanel";
+            this.headerLayoutPanel.RowCount = 1;
+            this.headerLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.headerLayoutPanel.Size = new System.Drawing.Size(781, 103);
+            this.headerLayoutPanel.TabIndex = 5;
             // 
             // tableLayoutPanelTopBarTextBox
             // 
@@ -287,6 +287,7 @@
             this.Name = "MainPageView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DSPAnalyzer";
+            this.TopMost = true;
             this.tableLayout.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);

@@ -9,3 +9,14 @@ C:\Users\reco\source\repos\VakifInternship_2\VakifInternship_2\obj\Debug\VakifIn
 C:\Users\reco\source\repos\VakifInternship_2\VakifInternship_2\obj\Debug\VakifInternship_2.csproj.CoreCompileInputs.cache
 C:\Users\reco\source\repos\VakifInternship_2\VakifInternship_2\obj\Debug\VakifInternship_2.exe
 C:\Users\reco\source\repos\VakifInternship_2\VakifInternship_2\obj\Debug\VakifInternship_2.pdb
+C:\Users\reco\Desktop\last_one\VakifInternshipTask2\VakifInternship_2\bin\Debug\VakifInternship_2.exe.config
+C:\Users\reco\Desktop\last_one\VakifInternshipTask2\VakifInternship_2\bin\Debug\VakifInternship_2.exe
+C:\Users\reco\Desktop\last_one\VakifInternshipTask2\VakifInternship_2\bin\Debug\VakifInternship_2.pdb
+C:\Users\reco\Desktop\last_one\VakifInternshipTask2\VakifInternship_2\obj\Debug\VakifInternship_2.csproj.AssemblyReference.cache
+C:\Users\reco\Desktop\last_one\VakifInternshipTask2\VakifInternship_2\obj\Debug\VakifInternship_2.csproj.SuggestedBindingRedirects.cache
+C:\Users\reco\Desktop\last_one\VakifInternshipTask2\VakifInternship_2\obj\Debug\VakifInternship_2.Properties.Resources.resources
+C:\Users\reco\Desktop\last_one\VakifInternshipTask2\VakifInternship_2\obj\Debug\VakifInternship_2.view.MainPageView.resources
+C:\Users\reco\Desktop\last_one\VakifInternshipTask2\VakifInternship_2\obj\Debug\VakifInternship_2.csproj.GenerateResource.cache
+C:\Users\reco\Desktop\last_one\VakifInternshipTask2\VakifInternship_2\obj\Debug\VakifInternship_2.csproj.CoreCompileInputs.cache
+C:\Users\reco\Desktop\last_one\VakifInternshipTask2\VakifInternship_2\obj\Debug\VakifInternship_2.exe
+C:\Users\reco\Desktop\last_one\VakifInternshipTask2\VakifInternship_2\obj\Debug\VakifInternship_2.pdb

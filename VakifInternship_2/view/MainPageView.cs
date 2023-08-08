@@ -23,23 +23,41 @@ namespace VakifInternship_2.view
             InitializeComponent();
         }
 
-        private void btnSelectPath_Click(object sender, EventArgs e)
+        private async void btnSelectPath_Click(object sender, EventArgs e)
         {
-            _controller = new UIController(tbxLog, progressBar, lblProcessInfo);
-            _controller.SelectPath(tbxInput);
-            if (!string.IsNullOrEmpty(tbxInput.Text))
+            if (lblProcessInfo.Text == "LOADING" || lblProcessInfo.Text == "PROCESSING")
             {
-                _controller.RefreshScreen(dataGridView1, tbxInput, lblProcessInfo);
+                Application.Restart();
+                Environment.Exit(1);
             }
+            else
+            {
+                _controller = new UIController(tbxLog, progressBar, lblProcessInfo);
+                _controller.SelectPath(tbxInput);
+                if (!string.IsNullOrEmpty(tbxInput.Text))
+                {
+                    _controller.RefreshScreen(dataGridView1, tbxInput, lblProcessInfo);
+                }
+            }
+           
         }
 
         private void lblProcessInfo_TextChanged(object sender, EventArgs e)
         {
-
-            if(lblProcessInfo.Text == "COMPLETED")
+            if (lblProcessInfo.Text == "LOADING" || lblProcessInfo.Text == "PROCESSING")
             {
-                dataGridView1.Columns.Remove("IsDynamicSP");
-                dataGridView1.Columns.Remove("HasVarChar2");
+                btnSelectPath.Text = "CANCEL";
+                btnSelectPath.BackColor = Color.Red;
+            }
+            else
+            {
+                btnSelectPath.Text = "Select Path";
+                btnSelectPath.BackColor = Color.FromArgb(255,255,128,0);
+                if (lblProcessInfo.Text == "COMPLETED")
+                {
+                    dataGridView1.Columns.Remove("IsDynamicSP");
+                    dataGridView1.Columns.Remove("HasVarChar2");
+                }
             }
         }
     }
